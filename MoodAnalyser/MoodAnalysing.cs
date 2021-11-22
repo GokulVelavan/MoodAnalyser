@@ -15,11 +15,17 @@ namespace MoodAnalyser
 
         public string AnalyseMood() //program to find
         {
+            try { 
             if (message.ToLower().Contains("sad"))
             {
                 return "SAD";
             }
             else
+            {
+                return "HAPPY";
+            }
+        }
+            catch ///HADLING THE EXCEPTION
             {
                 return "HAPPY";
             }
