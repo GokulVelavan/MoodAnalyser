@@ -83,7 +83,7 @@ namespace MoodAnalyserTest
             {
                 string message = null;
                 object expected = new MoodAnalysing(message);
-                object obj = MoodAnalysingFactory.CreateMoodAnalyse("MoodAnalysingWrong", "MoodAnalysingWrong");
+                object obj = MoodAnalysingFactory.CreateMoodAnalyse("MoodAnalyser.MoodAnalysingWrong", "MoodAnalysingWrong");
                 expected.Equals(obj);
             }
 
@@ -95,7 +95,7 @@ namespace MoodAnalyserTest
 
         [TestMethod]
 
-        public void WronConstructor()//return wrong constructor
+        public void WrongConstructor()
         {
             try
             {
@@ -108,6 +108,50 @@ namespace MoodAnalyserTest
             catch (CustomException ex2)
             {
                 Assert.AreEqual("Constructor not found", ex2.Message);
+            }
+        }
+
+        [TestMethod]
+
+        public void ParameterisedConstructor_ObjectAreEqual()//T.C5.1
+        {
+            object expected = new MoodAnalysing("HAPPY");
+            object obj = MoodAnalysingFactory.CreateMoodAnalyseParaConstructor("MoodAnalyser.MoodAnalysing", "MoodAnalysing");
+            expected.Equals(obj);
+        }
+
+
+        [TestMethod]
+
+        public void ParameterisedConstructor_WrongClassName()//T.C5.2
+        {
+            try
+            {
+                object expected = new MoodAnalysing("HAPPY");
+                object obj = MoodAnalysingFactory.CreateMoodAnalyseParaConstructor("MoodAnalyser.MoodAnalyserWrong", "MoodAnalysing");
+                expected.Equals(obj);
+            }
+
+            catch (CustomException ex)
+            {
+                Assert.AreEqual("Class not found", ex.Message);
+            }
+        }
+
+
+        [TestMethod]
+        public void ParameterisedConstructor_WrongConstrcutorName()//T.C5.3
+        {
+            try
+            {
+                object expected = new MoodAnalysing("HAPPY");
+                object obj = MoodAnalysingFactory.CreateMoodAnalyseParaConstructor("MoodAnalyser.MoodAnalysing", "MoodAnalyserWrong");
+                expected.Equals(obj);
+            }
+
+            catch (CustomException ex)
+            {
+                Assert.AreEqual("Constructor not found", ex.Message);
             }
         }
     }
