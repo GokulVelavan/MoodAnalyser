@@ -27,7 +27,7 @@ namespace MoodAnalyser
         }
             catch ///HADLING THE EXCEPTION
             {
-                return "HAPPY";
+                throw new CustomException(CustomException.ExceptionType.NULL_TYPE_EXCEPTION, "Message is null");//throwing exception
             }
         }
     }
