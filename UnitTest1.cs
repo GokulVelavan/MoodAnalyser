@@ -65,5 +65,50 @@ namespace MoodAnalyserTest
             }
         }
 
+        [TestMethod]
+
+        public void ObjectareEqual()//return object are equal
+        {
+            string message = null;
+            object expected = new MoodAnalysing(message);
+            object obj = MoodAnalysingFactory.CreateMoodAnalyse("MoodAnalyser.MoodAnalysing", "MoodAnalysing");
+            expected.Equals(obj);
+        }
+
+        [TestMethod]
+
+        public void WrongClassName()//return wrong class name
+        {
+            try
+            {
+                string message = null;
+                object expected = new MoodAnalysing(message);
+                object obj = MoodAnalysingFactory.CreateMoodAnalyse("MoodAnalysingWrong", "MoodAnalysingWrong");
+                expected.Equals(obj);
+            }
+
+            catch (CustomException ex1)
+            {
+                Assert.AreEqual("Class not found", ex1.Message);
+            }
+        }
+
+        [TestMethod]
+
+        public void WronConstructor()//return wrong constructor
+        {
+            try
+            {
+                string message = null;
+                object expected = new MoodAnalysing(message);
+                object obj = MoodAnalysingFactory.CreateMoodAnalyse("MoodAnalyser.MoodAnalysing", "MoodAnalysingWrong");
+                expected.Equals(obj);
+            }
+
+            catch (CustomException ex2)
+            {
+                Assert.AreEqual("Constructor not found", ex2.Message);
+            }
+        }
     }
 }
